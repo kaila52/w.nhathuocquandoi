@@ -3352,7 +3352,7 @@
                         <div id="FORM_ITEM75" class='ladi-element'>
                             <div class="ladi-form-item-container">
                                 <div class="ladi-form-item-background"></div>
-                                <div class='ladi-form-item'><textarea autocomplete="off" tabindex="4" name="message" required class="ladi-form-control" placeholder="Địa chỉ người nhận"></textarea></div>
+                                <div class='ladi-form-item'><textarea autocomplete="off" tabindex="4" name="address" required class="ladi-form-control" placeholder="Địa chỉ người nhận"></textarea></div>
                             </div>
                         </div>
                         <div id="FORM_ITEM76" class='ladi-element'>
@@ -3561,46 +3561,36 @@
     <script src="https://w.ladicdn.com/v2/source/ladipage.vi.min.js?v=1613963710519" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        var ip = "";
+        $.ajax({
+            url: "https://api.ipify.org/?format=json",
+            type: "Get",
+            success: function(msg) {
+                ip = msg.ip
+            }
+        });
         $("#BUTTON71").on("click", function() {
-            var dataform = JSON.stringify({
-                "form_config_id": "601a0fddc1b48f001107994c",
-                "tracking_form": [{
-                    "name": "url_page",
-                    "value": "https://w.nhathuocquandoi"
-                }],
-                "form_data": [{
-                    "name": "name",
-                    "value": $("input[name='name']").val()
-                }, {
-                    "name": "phone",
-                    "value": $("input[name='phone']").val()
-                }, {
-                    "name": "color",
-                    "value": $("input[name='color']").val()
-                }, {
-                    "name": "color",
-                    "value": $("input[name='size']").val()
-                }, {
-                    "name": "color",
-                    "value": $("input[name='message']").val()
-                }, {
-                    "name": "Phương thức thanh toán",
-                    "value": $("input[name='Phương thức thanh toán']:checked").val()
-                }, {
-                    "name": "vận chuyển",
-                    "value": $("input[name='vận chuyển']:checked").val()
-                }],
-                "time_zone": 7
-            })
+
+            var dataform = {
+                "name": $("input[name='name']").val(),
+                "phone": $("input[name='phone']").val(),
+                "color": $("input[name='color']").val(),
+                "size": $("input[name='size']").val(),
+                "address": $("textarea[name='address']").val(),
+                "pay": $("input[name='Phương thức thanh toán']:checked").val(),
+                "transport": $("input[name='vận chuyển']:checked").val(),
+                "ip": ip
+            }
 
             $.ajax({
-                url: "https://api.form.ladipage.com/sendform",
+                url: "https://script.google.com/macros/s/AKfycby_iVeVfA5UTL-ujxXWXzFKz6uV1RsSZ6lVIgznytgV8s-6PW_SHHDPEg/exec",
                 type: "POST",
-                contentType: "application/json",
+                // contentType: "application/json",
                 cache: false,
                 data: dataform,
                 success: function(msg) {
-                    console.log(msg)
+                    alert("Đặt hàng thành công!")
+                    return window.location.href("https://w.nhathuocquandoi.com");
                 },
             });
         });
