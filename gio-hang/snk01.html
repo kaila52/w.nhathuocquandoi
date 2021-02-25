@@ -3558,69 +3558,35 @@
     <link href="https://w.ladicdn.com/v2/source/ladipage.min.css?v=1613963710519" rel="stylesheet" type="text/css">
     <script src="https://w.ladicdn.com/v2/source/ladipage.vi.min.js?v=1613963710519" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script>
+        $.ajax({
+            url: "https://api.ipify.org/?format=json",
+            type: "Get"
+        }).then(res => {
+            $("body").prepend(`<p id='ip' style='display:none'>${res.ip}</p>`)
+        })
+    </script> -->
     <script>
         $("#BUTTON71").on("click", function() {
-            // var dataform = JSON.stringify({
-            //     "form_config_id": "601a0fddc1b48f001107994c",
-            //     "tracking_form": [{
-            //         "name": "url_page",
-            //         "value": "snk01"
-            //     }],
-            //     "form_data": [{
-            //         "name": "name",
-            //         "value": $("input[name='name']").val()
-            //     }, {
-            //         "name": "phone",
-            //         "value": $("input[name='phone']").val()
-            //     }, {
-            //         "name": "color",
-            //         "value": $("input[name='color']").val()
-            //     }, {
-            //         "name": "size",
-            //         "value": $("input[name='size']").val()
-            //     }, {
-            //         "name": "address",
-            //         "value": $("textarea[name='address']").val()
-            //     }, {
-            //         "name": "pay",
-            //         "value": $("input[name='Phương thức thanh toán']:checked").val()
-            //     }, {
-            //         "name": "transport",
-            //         "value": $("input[name='vận chuyển']:checked").val()
-            //     }],
-            //     "time_zone": 7
-            // })
-
-            // $.ajax({
-            //     async: true,
-            //     crossDomain: true,
-            //     url: "https://api.form.ladipage.com/sendform",
-            //     method: "POST",
-            //     headers: {
-            //         "sec-fetch-mode": "cors",
-            //         "cache-control": "no-cache",
-            //         "postman-token": "e603e767-2ab3-8788-bec9-0f2447d6036a"
-            //     },
-            //     data: dataform,
-            //     success: function(msg) {
-            //         console.log(msg)
-            //     },
-            // });
-            var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": "https://api.form.ladipage.com/sendform",
-                "method": "POST",
-                "headers": {
-                    "sec-fetch-mode": "cors",
-                    "cache-control": "no-cache",
-                    "postman-token": "e603e767-2ab3-8788-bec9-0f2447d6036a"
-                },
-                "data": "{\r\n    \"form_config_id\": \"601a0fddc1b48f001107994c\",\r\n    \"tracking_form\": [{\r\n        \"name\": \"url_page\",\r\n        \"value\": \"https://sbuilder.ladipage.com/editor/601a0da9c1b48f0011079794\"\r\n    }],\r\n    \"form_data\": [{\r\n        \"name\": \"name\",\r\n        \"value\": \"feewffefe\"\r\n    }, {\r\n        \"name\": \"phone\",\r\n        \"value\": \"09999\"\r\n    }, {\r\n        \"name\": \"TinhTrang\",\r\n        \"value\": [\"Viêm khớp\", \"Tê bì chân tay\", \"Đau nhức xương khớp\"]\r\n    }],\r\n    \"time_zone\": 7\r\n}"
+            var dataform = {
+                "name": $("input[name='name']").val(),
+                "phone": $("input[name='phone']").val(),
+                "color": $("input[name='color']").val(),
+                "size": $("input[name='size']").val(),
+                "address": $("textarea[name='address']").val(),
+                "pay": $("input[name='Phương thức thanh toán']:checked").val(),
+                "transport": $("input[name='vận chuyển']:checked").val(),
+                // "ip": $("#ip").html()
             }
 
-            $.ajax(settings).done(function(response) {
-                console.log(response);
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycby_iVeVfA5UTL-ujxXWXzFKz6uV1RsSZ6lVIgznytgV8s-6PW_SHHDPEg/exec",
+                type: "POST",
+                cache: false,
+                data: dataform,
+                success: function(msg) {
+                    window.top.location.href = `w.nhathuocquandoi.com/cam-on.html?name=${dataform.name}&phone=${dataform.phone}`
+                },
             });
         });
     </script>
