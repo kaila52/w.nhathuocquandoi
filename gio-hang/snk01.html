@@ -3569,25 +3569,40 @@
     <script>
         $("#BUTTON71").on("click", function() {
             var dataform = {
-                "name": $("input[name='name']").val(),
-                "phone": $("input[name='phone']").val(),
-                "color": $("input[name='color']").val(),
-                "size": $("input[name='size']").val(),
-                "address": $("textarea[name='address']").val(),
-                "pay": $("input[name='Phương thức thanh toán']:checked").val(),
-                "transport": $("input[name='vận chuyển']:checked").val(),
-                // "ip": $("#ip").html()
+                "form_config_id": "601a0fddc1b48f001107994c",
+                "tracking_form": [{
+                    "name": "url_page",
+                    "value": "https://sbuilder.ladipage.com/editor/601a0da9c1b48f0011079794"
+                }],
+                "form_data": [{
+                    "name": "name",
+                    "value": $("input[name='name']").val()
+                }, {
+                    "name": "phone",
+                    "value": $("input[name='phone']").val()
+                }, {
+                    "name": "TinhTrang",
+                    "value": ["Viêm khớp", "Tê bì chân tay", "Đau nhức xương khớp"]
+                }],
+                "time_zone": 7
             }
 
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycby_iVeVfA5UTL-ujxXWXzFKz6uV1RsSZ6lVIgznytgV8s-6PW_SHHDPEg/exec",
-                type: "POST",
-                cache: false,
-                data: dataform,
-                success: function(msg) {
-                    window.top.location.href = `../cam-on.html?name=${dataform.name}&phone=${dataform.phone}`
+            fetch("https://api.form.ladipage.com/sendform", {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'no-cors', // no-cors, *cors, same-origin
+                cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-            });
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'strict-origin-when-cross-origin', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(dataform) // body data type must match "Content-Type" header
+            }).then(data => {
+                console.log(data)
+                console.log(data.data)
+            })
         });
     </script>
 </body>
