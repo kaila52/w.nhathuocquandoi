@@ -3600,7 +3600,7 @@
                 referrerPolicy: 'strict-origin-when-cross-origin', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                 body: JSON.stringify(dataform) // body data type must match "Content-Type" header
             }).then(data => {
-                console.log(data)
+                console.log(data.json())
                 console.log(data.data)
             })
         });
